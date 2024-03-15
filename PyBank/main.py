@@ -8,21 +8,16 @@ import os
 csv_path = os.path.join("Resources","budget_data.csv")
 
 #variables
-row_count = 0
 tot_months = 0
 tot_PL = 0
 changes_PL = [] #
-avg_PL = [] #avg=tot_PL/tot_month
-increase_max = [] #max
-decrease_max = [] #min
 
 #open file using path
 with open (csv_path, "r") as csvfile:
-
     #read file
     csvreader = csv.reader(csvfile, delimiter=",")
-
-    next(csvreader, None)  # Skip the header
+    # Skip the header
+    next(csvreader, None)
 
     #loop through data row by row
     for row in csvreader:
@@ -33,26 +28,30 @@ with open (csv_path, "r") as csvfile:
         #add column [1] to itself
         tot_PL += int(row[1])
 
-        #evaluate change in  PL??????
+        #???? changed_PL
 
-        #
-        increase_max = max(row[1])
-        decrease_max = min(row[1])
+    increase_max = max(row[1])
+    decrease_max = min(row[1])
 
 avg_PL = int(tot_PL)/int(tot_months)
 
 #save output path to write
-output_path = os.path.join("..", "Analysis", "PyBankAnalysis.csv")
+output_path = os.path.join("..", "Analysis", "PyBankAnalysis.txt")
 
 #open file to write
-with open(output_path, "w", newline= '') as output_file:
+with open(output_path, "w") as output_file:
 
-    #initialize writer
-    csvwriter = csv.writer(output_file, delimiter=",")
+    #initialize writer - do you need to initialize 
+    ##txtwriter = txtwriter.writer(output_file)
 
     #write rows
     #need to use brackets between ( and " to make it a tuple. The writer function expects iteration????
-    csvwriter.writerow(["Financial Analysis"])
-    csvwriter.writerow(["------------------------------"])
-    csvwriter.writerow([tot_months])
+    #does this have to be line by line
+    output_file.write("Financial Analysis\n")
+    output_file.write("------------------------------\n")
+    output_file.write(f"Total Months: {tot_months}\n")
+    output_file.write(f"Total: ${tot_PL}\n")
+    #output_file.write(f"Average Change: ${avg_PLs}\n")
+    output_file.write(f"Greatest Increase in Profits: {increase_max}\n")
+    output_file.write(f"Greatest Decrease in Profits: {decrease_max}\n")
  
