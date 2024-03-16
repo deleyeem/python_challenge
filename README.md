@@ -1,5 +1,8 @@
 # Python-Challenge
 
+I worked with tutor Kurt on Sat 3/16/24 to work through the PyBank challenge that I started.
+
+Main instructions:
 PyBank: Python script to analyze the financial records
   Your task is to create a Python script that analyzes the records to calculate each of the following values:
   The total number of months included in the dataset
@@ -8,7 +11,7 @@ PyBank: Python script to analyze the financial records
   The greatest increase in profits (date and amount) over the entire period
   The greatest decrease in profits (date and amount) over the entire period
   
-PyPoll ch:helping a small, rural town modernize its vote-counting process
+PyPoll: helping a small, rural town modernize its vote-counting process
   Your task is to create a Python script that analyzes the votes and calculates each of the following values:
   The total number of votes cast
   A complete list of candidates who received votes
