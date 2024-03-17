@@ -1,6 +1,6 @@
 # Python-Challenge
 
-I worked with tutor Kurt on Sat 3/16/24 to work through the PyBank challenge that I started. I worked with BCS
+I worked with tutor Kurt on Sat 3/16/24 to work through the PyBank challenge that I started. I worked with BCS learning assistant on Sun 3/17/24 to work through the for loop and dictionary.
 
 Main instructions:
 PyBank: Python script to analyze the financial records
