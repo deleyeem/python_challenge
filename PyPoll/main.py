@@ -2,7 +2,7 @@ import os
 import csv
 
 #changedirectory path to the realpath of the file
-#os.chdir(os.path.dirname(os.path.realpath(__file__)))
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 #Paths
 CSV_PATH = os.path.join("Resources", "election_data.csv")
@@ -16,11 +16,13 @@ CANDIDATE_INDEX=2
 #variables
 previous_candidate = None
 tot_votes = 0
-candidate_votes = {}
+
+#dictionary
+results = {}
 
 #list
 candidates = []
-vote_per_candidate = []
+
 #open file using path
 with open(CSV_PATH) as csv_file:
     #read file
@@ -39,37 +41,42 @@ with open(CSV_PATH) as csv_file:
 
         #doing this an alternative way via dictionary
         # The total number of votes each candidate won
-        if current_candidate in candidate_votes:
-            candidate_votes[current_candidate] += 1
+        if current_candidate in results:
+            results[current_candidate] += 1
         else:
-            candidate_votes[current_candidate] = 1
+            results[current_candidate] = 1
 
-        # The percentage of votes each candidate won
-        for candidate in candidate_votes:
-            votes=candidate_votes[candidate]
-            percentages = (votes/tot_votes) *100
-            #how to add to dictionary?
+#The percentage of votes each candidate won
+#when writing a loop like this it will always assume the key from the dictionary
+winning_count= 0
+
+    
+#open file to write
+with open(OUTPUT_PATH, "w") as output_file:
+    output1= ("Election Results\n"
+        "-------------------------\n"
+        f"Total Votes: {tot_votes}\n"
+        "-------------------------\n")  
+    
+    output_file.write(output1)
+    print(output1)
+
+    for candidate in results:
+        votes=results[candidate]
+        percentages = "{:.3f}".format((votes/tot_votes) *100)
+
+        #The winner of the election based on popular vote
+        if votes > winning_count:
+            winner = candidate
+            winning_count = votes
         
-        # The winner of the election based on popular vote
-        #for vote_count in 
-    print(candidate_votes)
-
-output = ("Election Results\n"
-          "-------------------------\n"
-          f"Total Votes: {tot_votes}\n"
-          "-------------------------\n"
-          fCharles Casper Stockham: 23.049% (85213)
-          Diana DeGette: 73.812% (272892)
-          Raymon Anthony Doane: 3.139% (11606)
-          "-------------------------\n"
-          f"Winner: {winner}\n"
-          "-------------------------\n")
-
-# #open file to write
-# with open(OUTPUT_PATH, "w") as output_file:
-#     output_file.write(output)
-
-# #print to terminal
-# print(output)
-
-#dictionary with candidate names as key and value
+        output2= f"{candidate}: {percentages}% ({votes})\n"
+        
+        output_file.write(output2)
+        print(output2)
+    output3= ("-------------------------\n"
+            f"Winner: {winner}\n"
+            "-------------------------\n")
+    
+    output_file.write(output3)
+    print(output3)

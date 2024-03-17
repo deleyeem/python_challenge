@@ -30,7 +30,7 @@ with open(CSV_PATH) as csvfile:
     #Skip header
     next(csvreader)
 
-    #loop through data row by row
+    #loop csv data row by row
     for row in csvreader:
         #count number of rows for month
         tot_months+= 1
@@ -55,7 +55,7 @@ with open(CSV_PATH) as csvfile:
                 decrease_max_month = row[MONTH_INDEX] 
         #prepare for next month
         previous_PL = current_PL
-        #
+        #calc avg PL
         avg_PL = int(tot_changes_PL)/int(tot_months)
 
 output = ("Financial Analysis\n"
@@ -66,10 +66,9 @@ output = ("Financial Analysis\n"
           f"Greatest Increase in Profits: {increase_max_month} (${increase_max_value})\n"
           f"Greatest Decrease in Profits: {decrease_max_month} (${decrease_max_value})\n")
 
-#open file to write
+#output file write mode
 with open(OUTPUT_PATH, "w") as output_file:
+    #write to file
     output_file.write(output)
-    print(output)  
-
-#print on terminal
-print(output)
+    #print to terminal
+    print(output)
